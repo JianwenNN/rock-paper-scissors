@@ -11,17 +11,19 @@ function computerPlay() {
     }
 }
 
-console.log(computerPlay());
 //User pick rock, scissor or paper.
     //--Prompt to ask user to enter rock, scissor or paper.
     //--Convert player's selection to lowercase to enable comparison.
+function playerPlay() {
+    return (prompt(`Please enter your choice:`, `rock`)).toLowerCase();
+}
 
 //Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
     const compare = {
         rock: {weakTo: 'paper', strongTo: 'scissors'},
         paper: {weakTo: 'scissors', strongTo: 'rock'},
-        scissors: {weekTo: 'rock', strongTo: 'paper'}
+        scissors: {weekTo: 'rock', strongTo: 'paper'},
     }
 
     if(compare[playerSelection].weakTo === computerSelection) {
@@ -37,3 +39,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+const playerSelection = playerPlay();
+const computerSelection = computerPlay();
+console.log(playerSelection);
+console.log(computerSelection);
+console.log(playRound(playerSelection, computerSelection));
