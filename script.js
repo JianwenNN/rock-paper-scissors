@@ -19,9 +19,9 @@ console.log(computerPlay());
 //Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
     const compare = {
-        rock: {weakTo: 'paper' strongTo: 'scissors'}
-        paper: {weakTo: 'scissors' strongTo: 'rock'}
-        scissors: {weekTo: 'rock' strongTo: 'paper'}
+        rock: {weakTo: 'paper', strongTo: 'scissors'},
+        paper: {weakTo: 'scissors', strongTo: 'rock'},
+        scissors: {weekTo: 'rock', strongTo: 'paper'}
     }
 
     if(compare[playerSelection].weakTo === computerSelection) {
@@ -33,6 +33,7 @@ function playRound(playerSelection, computerSelection) {
     }
 
     else {
-        alert("You entered something weird...");
+        alert("Tie!!");
     }
 }
+
