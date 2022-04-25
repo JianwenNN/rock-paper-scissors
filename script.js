@@ -14,8 +14,8 @@ function computerPlay() {
 //User pick rock, scissor or paper.
     //--Prompt to ask user to enter rock, scissor or paper.
     //--Convert player's selection to lowercase to enable comparison.
-function playerPlay() {
-    return (prompt(`Please enter your choice:`, `rock`)).toLowerCase();
+function playerPlay(e) {
+    return e.target.id;
 }
 
 //Compare the user pick and computer pick, determine who wins.
@@ -41,7 +41,9 @@ function playRound(playerSelection, computerSelection) {
         return "tie";
     }
 }
-
+//Add event listener to all buttons
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', playerPlay));
 //Play 5 rounds game.
 function game() {
     let playerScore = 0;
@@ -49,6 +51,7 @@ function game() {
     for (let i = 0; i < 5; i++) {
         let playerSelection = playerPlay();
         let computerSelection = computerPlay();
+        
         let outcome = playRound(playerSelection, computerSelection);
         switch(outcome) {
             case "win":
