@@ -11,16 +11,11 @@ function computerPlay() {
     }
 }
 
-//User pick rock, scissor or paper.
-    //--Prompt to ask user to enter rock, scissor or paper.
-    //--Convert player's selection to lowercase to enable comparison.
-async function playerPlay(e) {
-    return e.target.id;
-}
-
+let round = 1;
 
 //Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
+    const history = document.getElementById('history');
     const compare = {
         rock: {weakTo: 'paper', strongTo: 'scissors'},
         paper: {weakTo: 'scissors', strongTo: 'rock'},
@@ -28,19 +23,23 @@ function playRound(playerSelection, computerSelection) {
     }
 
     if(compare[playerSelection].weakTo === computerSelection) {
-        alert(`You Lose! ${computerSelection} beats ${playerSelection}!`);
+        history.innerHTML += `Round ${round}: You Lose! ${computerSelection} beats ${playerSelection}!<br>`;
+        round++;
         return "lose";
     }
 
     else if(compare[playerSelection].strongTo === computerSelection) {
-        alert(`You WIN! ${playerSelection} beats ${computerSelection}!`)
+        history.innerHTML += `Round ${round}: You WIN! ${playerSelection} beats ${computerSelection}!<br>`;
+        round++;
         return "win";
     }
 
     else {
-        alert("Tie!!");
+        history.innerHTML += `Round ${round}: Tie!<br>`;
+        round++;
         return "tie";
     }
+    
 }
 
 const buttons = document.querySelectorAll('button');
@@ -55,6 +54,8 @@ function game(e) {
     
         let playerSelection = e.target.id;
         let computerSelection = computerPlay();
+        const displayPlayer = document.getElementById('playerScore');
+        const displayComputer = document.getElementById('computerScore');
 
         let outcome = playRound(playerSelection, computerSelection);
         switch(outcome) {
@@ -67,13 +68,16 @@ function game(e) {
             case "tie":
                 break;
         }
-        console.log("player score: " + playerScore);
-        console.log("computer score: " + computerScore);
+
+        displayPlayer.innerHTML = `Player Score: ${playerScore}`;
+        displayComputer.innerHTML = `Computer Score: ${computerScore}`;
         i++;
         if (i == 5) {
             const winner = playerScore > computerScore?"Player won!":
             playerScore == computerScore?"Tie!":"Computer won!";
-            console.log(winner);
+            const result = document.createElement('div');
+            result.innerHTML = winner;
+            document.body.appendChild(result);
             buttons.forEach(button => button.removeEventListener('click', game));
         }
         
