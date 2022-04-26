@@ -12,10 +12,11 @@ function computerPlay() {
 }
 
 let round = 1;
+const history = document.getElementById('history');
 
 //Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
-    const history = document.getElementById('history');
+    
     const compare = {
         rock: {weakTo: 'paper', strongTo: 'scissors'},
         paper: {weakTo: 'scissors', strongTo: 'rock'},
@@ -41,21 +42,34 @@ function playRound(playerSelection, computerSelection) {
     }
     
 }
-
-const buttons = document.querySelectorAll('button');
 //Play 5 rounds game.
 let i = 0;
 let playerScore = 0;
 let computerScore = 0;
+const displayPlayer = document.getElementById('playerScore');
+const displayComputer = document.getElementById('computerScore');
+const result = document.createElement('div');
 
+const buttons = document.querySelectorAll('button');
 buttons.forEach(button => button.addEventListener('click', game));
-        
+
+const reset = document.getElementById('reset');
+reset.addEventListener('click', function(){
+    i = 0;
+    round = 1;
+    displayPlayer.innerHTML = 'Player Score: 0';
+    displayComputer.innerHTML = 'Computer Score: 0';
+    history.innerHTML = 'History: <br>';
+    buttons.forEach(button => button.addEventListener('click', game));
+    result.innerHTML = '';
+    result.removeAttribute('id');
+    playerScore = 0;
+    computerScore = 0;
+})
 function game(e) {
-    
+
         let playerSelection = e.target.id;
         let computerSelection = computerPlay();
-        const displayPlayer = document.getElementById('playerScore');
-        const displayComputer = document.getElementById('computerScore');
 
         let outcome = playRound(playerSelection, computerSelection);
         switch(outcome) {
@@ -75,7 +89,7 @@ function game(e) {
         if (i == 5) {
             const winner = playerScore > computerScore?"Player won!":
             playerScore == computerScore?"Tie!":"Computer won!";
-            const result = document.createElement('div');
+            result.setAttribute('id', 'result');
             result.innerHTML = winner;
             document.body.appendChild(result);
             buttons.forEach(button => button.removeEventListener('click', game));
