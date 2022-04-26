@@ -11,15 +11,12 @@ function computerPlay() {
     }
 }
 
-//User pick rock, scissor or paper.
-    //--Prompt to ask user to enter rock, scissor or paper.
-    //--Convert player's selection to lowercase to enable comparison.
-function playerPlay() {
-    return (prompt(`Please enter your choice:`, `rock`)).toLowerCase();
-}
+let round = 1;
+const history = document.getElementById('history');
 
 //Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
+    
     const compare = {
         rock: {weakTo: 'paper', strongTo: 'scissors'},
         paper: {weakTo: 'scissors', strongTo: 'rock'},
@@ -27,28 +24,53 @@ function playRound(playerSelection, computerSelection) {
     }
 
     if(compare[playerSelection].weakTo === computerSelection) {
-        alert(`You Lose! ${computerSelection} beats ${playerSelection}!`);
+        history.innerHTML += `Round ${round}: You Lose! ${computerSelection} beats ${playerSelection}!<br>`;
+        round++;
         return "lose";
     }
 
     else if(compare[playerSelection].strongTo === computerSelection) {
-        alert(`You WIN! ${playerSelection} beats ${computerSelection}!`)
+        history.innerHTML += `Round ${round}: You WIN! ${playerSelection} beats ${computerSelection}!<br>`;
+        round++;
         return "win";
     }
 
     else {
-        alert("Tie!!");
+        history.innerHTML += `Round ${round}: Tie!<br>`;
+        round++;
         return "tie";
     }
+    
 }
-
 //Play 5 rounds game.
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = playerPlay();
+let i = 0;
+let playerScore = 0;
+let computerScore = 0;
+const displayPlayer = document.getElementById('playerScore');
+const displayComputer = document.getElementById('computerScore');
+const result = document.createElement('div');
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', game));
+
+const reset = document.getElementById('reset');
+reset.addEventListener('click', function(){
+    i = 0;
+    round = 1;
+    displayPlayer.innerHTML = 'Player Score: 0';
+    displayComputer.innerHTML = 'Computer Score: 0';
+    history.innerHTML = 'History: <br>';
+    buttons.forEach(button => button.addEventListener('click', game));
+    result.innerHTML = '';
+    result.removeAttribute('id');
+    playerScore = 0;
+    computerScore = 0;
+})
+function game(e) {
+
+        let playerSelection = e.target.id;
         let computerSelection = computerPlay();
+
         let outcome = playRound(playerSelection, computerSelection);
         switch(outcome) {
             case "win":
@@ -60,11 +82,18 @@ function game() {
             case "tie":
                 break;
         }
-        console.log("player score: " + playerScore);
-        console.log("computer score: " + computerScore);
-    }
-    const winner = playerScore > computerScore?"Player won!":"Computer won!";
-    console.log(winner);
+
+        displayPlayer.innerHTML = `Player Score: ${playerScore}`;
+        displayComputer.innerHTML = `Computer Score: ${computerScore}`;
+        i++;
+        if (i == 5) {
+            const winner = playerScore > computerScore?"Player won!":
+            playerScore == computerScore?"Tie!":"Computer won!";
+            result.setAttribute('id', 'result');
+            result.innerHTML = winner;
+            document.body.appendChild(result);
+            buttons.forEach(button => button.removeEventListener('click', game));
+        }
+        
 }
 
-game();
