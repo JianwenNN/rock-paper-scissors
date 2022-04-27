@@ -65,13 +65,4 @@ button:hover {
     background-color: rgb(206, 156, 253);
 }
 
-#score-board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: rgb(124, 182, 66);
-    border-radius: 10px;
-}
+
