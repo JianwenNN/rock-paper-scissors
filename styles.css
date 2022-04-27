@@ -1,0 +1,77 @@
+#reset {
+    background-color: rgb(97, 199, 199);
+    padding: 5px 10px 10px 10px;
+    border-radius: 10px;
+    width: 60px;
+    height: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+#reset:hover {
+    opacity: 0.5;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#result {
+    font-weight: bold;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: rgb(190, 62, 62);
+    padding: 15px 10px 10px 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 80px;
+    margin-top: 70px;
+}
+
+button {
+    padding: 10px;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-weight: bold;
+    color: aliceblue;
+    border: none;
+    width: 80px;
+    height: 45px;
+    border-radius: 10px;
+}
+
+button:hover {
+    opacity: 0.5;
+}
+
+#buttons {
+    display: flex;
+    gap: 8px;
+}
+#paper {
+    background-color: rgb(129, 229, 249);
+}
+
+#scissors {
+    background-color: rgb(240, 163, 197);
+}
+
+#rock {
+    background-color: rgb(206, 156, 253);
+}
+
+#score-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgb(124, 182, 66);
+    border-radius: 10px;
+}

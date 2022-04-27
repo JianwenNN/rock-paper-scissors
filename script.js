@@ -11,10 +11,10 @@ function computerPlay() {
     }
 }
 
+//Compare the user pick and computer pick, determine who wins, and log it in history
 let round = 1;
 const history = document.getElementById('history');
 
-//Compare the user pick and computer pick, determine who wins.
 function playRound(playerSelection, computerSelection) {
     
     const compare = {
@@ -42,16 +42,8 @@ function playRound(playerSelection, computerSelection) {
     }
     
 }
-//Play 5 rounds game.
-let i = 0;
-let playerScore = 0;
-let computerScore = 0;
-const displayPlayer = document.getElementById('playerScore');
-const displayComputer = document.getElementById('computerScore');
-const result = document.createElement('div');
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', game));
+//Reset function
 
 const reset = document.getElementById('reset');
 reset.addEventListener('click', function(){
@@ -66,6 +58,18 @@ reset.addEventListener('click', function(){
     playerScore = 0;
     computerScore = 0;
 })
+
+//Play 5 rounds game.
+let i = 0;
+let playerScore = 0;
+let computerScore = 0;
+const displayPlayer = document.getElementById('playerScore');
+const displayComputer = document.getElementById('computerScore');
+const result = document.createElement('div');
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', game));
+
 function game(e) {
 
         let playerSelection = e.target.id;
